@@ -115,8 +115,8 @@
         }
         
         .profile-img {
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
             object-fit: cover;
             border: 3px solid var(--primary-color);
@@ -312,48 +312,49 @@
 </head>
 <body>
     <div class="business-card">
+        <div class="card-header-1">
+            <div class="company-sub">
+            </div>
+        </div>
         <div class="card-header">
             <div class="company-name">
-                <img src="images/logo-agc-vie.png" alt="Logo AGC-VIE" class="company-name" id="company-name">
+                <img src="images/logo-agc-vie.png" alt="Logo AGC-VIE" class="company-name" id="company-name" style="width:80px; height:80px;">
             </div>
             <div class="company-sub">
                 <div>MEMBRE DU RESEAU</div>
-                <img src="images/logo-reseau.png" alt="Logo réseau" class="company-sub" id="company-sub">
-            </div>
-        </div>
-        <div class="card-header-1">
-            <div class="company-sub">
+                <img src="images/logo-reseau.png" alt="Logo réseau" class="company-sub" id="company-sub" style="width:60px; height:15px;">
             </div>
         </div>
         
         <div class="card-body">
             <div class="profile-section">
-                <img src="images/photo-profile.png" alt="Photo de Frédéric BAYONNE" class="profile-img" id="profile-img">
+                <img src="images/photo-profile.png" alt="Photo de Alex LOUSSIKILA" class="profile-img" id="profile-img">
                 <div class="person-info">
-                    <h2 class="person-name">Frédéric BAYONNE</h2>
-                    <div class="person-title">Ingénieur en Génie Numérique</div>
+                    <h2 class="person-name">Alex Branly LOUSSIKILA</h2>
+                    <div class="person-title">Service Statistique et Actuariat</div>
                 </div>
             </div>
             
             <div class="contact-info">
                 <div class="contact-item">
                     <div class="contact-icon"><i class="fas fa-phone"></i></div>
-                    <div>+242 06 184 82 04 / +237 654 48 45 24</div>
+                    <div>+242 06 625 90 33</div>
                 </div>
                 <div class="contact-item">
                     <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-                    <div>62 Rue Piscine Diata Brazzaville, Congo</div>
+                    <div>BP.: 1110 Brazzaville<br>Avenue Amilcar Cabral Centre-ville</div>
                 </div>
                 <div class="contact-item">
                     <div class="contact-icon"><i class="fas fa-envelope"></i></div>
                     <div>
-                        <a href="mailto:bayonnefrederic09@gmail.com">bayonnefrederic09@gmail.com</a><br>
+                        <a href="mailto:alex.loussikila@agc-vie.cg">alex.loussikila@agc-vie.cg</a><br>
+                        <a href="mailto:branly.loussikila@outlook.fr">branly.loussikila@outlook.fr</a>
                     </div>
                 </div>
             </div>
             
             <div class="qr-section">
-                <div id="qrcode" class="qr-code"></div>
+                <div id="qrcode" class="qr-code" style="width:150px; height:150px;"></div>
                 <div class="qr-label">Scannez pour enregistrer mes coordonnées</div>
             </div>
             
@@ -368,27 +369,44 @@
                     <i class="fas fa-calendar-alt"></i> RDV
                 </button>
             </div>
-            <div class="social-links">
-                <a href="https://www.linkedin.com/in/fr%C3%A9d%C3%A9ric-bayonne-5952b224b/" class="social-link" target="_blank" title="LinkedIn">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
-                <a href="https://github.com/MBFDM/" class="social-link" target="_blank" title="GitHub">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="https://x.com/home" class="social-link" target="_blank" title="X">
-                    <i class="fab fa-twitter"></i>
-                </a>
-            </div>
-            
             <div class="watermark">AGC-VIE © 2025</div>
         </div>
     </div>
+    <script src="app.js"></script>
 
     <script>
+        // Données de la carte de visite
+        const contactData = {
+            company: "ASSURANCES GENERALES DU CONCO-VIE",
+            membership: "MEMBRE DU RESEARCH",
+            network: "Globus",
+            phone1: "+242 06 625 90 33",
+            address: "BP.: 1110 Brazzaville, Avenue Amilcar Cabral Centre-ville",
+            email1: "branly.loussikila@outlook.fr",
+            email2: "alex.loussikila@agc-vie.cg",
+            name: "Alex Branly LOUSSIKILA",
+            marital: "Époux Elgha MOE - MACKOSSO",
+            title: "Service Statistique et Actuariat",
+            photo: "images/photo-profile.png"
+        };
+        // Générer le QR Code avec les informations de contact
+        function generateQRCode() {
+            const vcard = `BEGIN:VCARD
+VERSION:3.0
+FN:${contactData.name}
+ORG:${contactData.company}
+TITLE:${contactData.title}
+TEL;TYPE=WORK,VOICE:${contactData.phone1}
+TEL;TYPE=WORK,VOICE:${contactData.phone2}
+EMAIL;TYPE=PERSONAL,INTERNET:${contactData.email1}
+EMAIL;TYPE=WORK,INTERNET:${contactData.email2}
+ADR;TYPE=WORK:${contactData.address}
+NOTE:${contactData.membership} - ${contactData.network}
+PHOTO;VALUE=URI:${contactData.photo}
+END:VCARD`;
 
         // Remplace cette URL par celle que tu veux encoder en QR code
-        const url = "https://gist.githubusercontent.com/MBFDM/c2c8c913d8044e4ba40d0492bf45a3cc/raw/8d52968e9f772fc1a766072dd4409d508ceb3cca/carte_visite"; 
-
+        const url = "https://mbfdm.github.io/carte.github.io/";
         new QRCode(document.getElementById("qrcode"), {
             text: url,
             width: 150,
@@ -397,7 +415,8 @@
             colorLight: "#ffffff",
             correctLevel: QRCode.CorrectLevel.H
         });
-        
+
+        }
         
         // Enregistrer dans les contacts
         function saveToContacts() {
